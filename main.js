@@ -33,24 +33,61 @@ const printBoard = () => {
 }
 
 const horizontalWin = () => {
+
   // Your code here to check for horizontal wins
+  for (let i = 0; i < board.length; i++) {
+    if (board[i] == [playerTurn, playerTurn, playerTurn]) {
+      console.log("horiz win!")
+      return true
+    }
+  }
+
+  return false
 }
 
 const verticalWin = () => {
   // Your code here to check for vertical wins
+  
+  for (let i = 0; i < board.length; i++) {
+    if (board[0][i] == playerTurn && board[1][i] == playerTurn && board[2][i] == playerTurn) {
+      console.log("vert win!")
+      return true
+    }
+  }
+
+  return false
 }
 
 const diagonalWin = () => {
   // Your code here to check for diagonal wins
+
+  if (board[0][0] == playerTurn && board[1][1] == playerTurn && board[2][2] == playerTurn) {
+    console.log("diag win!")
+    return true
+  } else if (board[0][2] == playerTurn && board[1][1] == playerTurn && board[2][0]) {
+    console.log("diag opp win!")
+    return true
+  } else {
+    return false
+  }
+
 }
 
 const checkForWin = () => {
   // Your code here call each of the check for types of wins
+  horizontalWin()
+  verticalWin()
+  diagonalWin()
+
 }
 
 const ticTacToe = (row, column) => {
   // Your code here to place a marker on the board
+  board[row][column] = playerTurn;
+  console.log(board);
   // then check for a win
+  checkForWin() 
+
 }
 
 const getPrompt = () => {
@@ -59,6 +96,13 @@ const getPrompt = () => {
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
       ticTacToe(row, column);
+      
+      if (playerTurn == 'O') {
+        playerTurn = 'X';
+      } else {
+        playerTurn = 'O';
+      };
+
       getPrompt();
     });
   });
