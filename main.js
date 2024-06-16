@@ -36,7 +36,7 @@ const horizontalWin = () => {
 
   // Your code here to check for horizontal wins
   for (let i = 0; i < board.length; i++) {
-    if (board[i] == [playerTurn, playerTurn, playerTurn]) {
+    if (board[i][0] == playerTurn && board[i][1] == playerTurn && board[i][2] == playerTurn) {
       console.log("horiz win!")
       return true
     }
