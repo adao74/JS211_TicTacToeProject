@@ -86,7 +86,13 @@ const ticTacToe = (row, column) => {
   board[row][column] = playerTurn;
   console.log(board);
   // then check for a win
-  checkForWin() 
+  checkForWin()
+
+  if (playerTurn == 'O') {
+    playerTurn = 'X';
+  } else {
+    playerTurn = 'O';
+  };
 
 }
 
@@ -97,12 +103,6 @@ const getPrompt = () => {
     rl.question('column: ', (column) => {
       ticTacToe(row, column);
       
-      if (playerTurn == 'O') {
-        playerTurn = 'X';
-      } else {
-        playerTurn = 'O';
-      };
-
       getPrompt();
     });
   });
