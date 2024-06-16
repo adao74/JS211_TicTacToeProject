@@ -16,7 +16,22 @@
         <p>Get ready to play!</p>
         <!-- uses the built-in onclick attribute to call the resetBoard function -->
         <button onclick="resetBoard()" type="button" class="btn btn-primary btn-lg" name="button">Restart</button>
+        <br /><br />
+        <button onclick="resetWins()" type="button" class="btn btn-primary btn-lg" name="button">Reset Wins</button>
       </div>
+
+      <label for="x">Player X</label>
+      <input type=text id="x" placeholder="type your name here" value="" onkeyup="savePlayerX(this.value)">
+      <label for="o">Player O</label>
+      <input type=text id="o" placeholder="type your name here" value="" onkeyup="savePlayerO(this.value)">
+      <br /><br />
+
+      <p>Which player is up:</p>
+      <p id="player">X</p>
+      <p>Number of wins for player X:</p>
+      <p id="playerXwins">0</p>
+      <p>Number of wins for player O:</p>
+      <p id="playerOwins">0</p>
 
       <table align="center">
         <tr>

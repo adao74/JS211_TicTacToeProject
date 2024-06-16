@@ -14,6 +14,18 @@ let board = [
   ['','',''],
   ['','','']
 ];
+let playerXCount = 0;
+let playerOCount = 0;
+let playerX = " ";
+let playerO = " ";
+
+const savePlayerX = (val) => {
+  playerX = val;
+}
+
+const savePlayerO = (val) => {
+  playerO = val;
+}
 
 // is called when a square is clicked. "this" = element here
 const handleClick = (element) => {
@@ -59,9 +71,20 @@ const checkForWin = () => {
   // calls each checkForWin possibility and if any are true gives a page alert,
   if(horizontalWin() || verticalWin() || diagonalWin()) {
     // **BONUS** you could make the dismissal of this alert window reset the board...
-    window.alert(`Player ${currentMarker} won!`)
+    if (currentMarker == 'X') {
+      window.alert(`Congrats ${playerX}, you won with ${currentMarker}s!`)
+    } else {
+      window.alert(`Congrats ${playerO}, you won with ${currentMarker}s!`)
+    }
+
     // runs only after user dismisses the dialog box (alert window) b/c the dialog box prevents the user from accessing the rest of the program's UI until the dialog box is closed
+    increaseWins()
+
     resetBoard()
+
+    // player X should go first after a reset
+    changeMarkertoX()
+    
   } else {
     // if no win, change the marker from X to O, or O to X for the next player.
     changeMarker()
@@ -111,6 +134,19 @@ const diagonalWin = () => {
 const changeMarker = () => {
   // ternary operator: if it's an X make it an O, if O make it an X
   currentMarker = currentMarker === "X" ? "O" : "X"
+
+  // tell users which player's turn it is
+  if (currentMarker === 'X') {
+    document.getElementById("player").innerHTML = `${playerX} X`
+  } else {
+    document.getElementById("player").innerHTML = `${playerO} O`
+  }
+}
+
+
+const changeMarkertoX = () => {
+  currentMarker = 'X'
+  document.getElementById("player").innerHTML = `${playerX} X`
 }
 
 const resetBoard = () => {
@@ -132,12 +168,30 @@ const resetBoard = () => {
       board[i][j] = ''
     }
   }
+
+}
+
+const increaseWins = () => {
+  if (currentMarker === 'X') {
+    playerXCount++
+    document.getElementById("playerXwins").innerHTML = playerXCount
+  } else {
+    playerOCount++
+    document.getElementById("playerOwins").innerHTML = playerOCount
+  }
+}
+
+const resetWins = () => {
+  playerXCount = 0;
+  playerOCount = 0;
+  document.getElementById("playerXwins").innerHTML = playerXCount;
+  document.getElementById("playerOwins").innerHTML = playerOCount
 }
 
 // **BONUSES**
 
-// 1. Display the current player's turn
-// 2. Count number of wins for each player and display them
+// 1. Display the current player's turn => DONE
+// 2. Count number of wins for each player and display them => DONE
 // 3. Reset the number of wins
 // 4. Clear the board on alert window dismissal
 // 5. Add players names and display who wins, i.e. "Congrats Emily, you won with 0s!"
